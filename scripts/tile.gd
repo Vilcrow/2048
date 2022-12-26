@@ -67,4 +67,7 @@ func update_color():
 
 func play_doubling_animation():
 	$AnimationPlayer.play("doubling")
-	$DoublingPlayer.play()
+	$DoublingSound.play()
+
+func play_appearance_animation():
+	$AnimationPlayer.play("appearance")

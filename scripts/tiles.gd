@@ -169,6 +169,7 @@ func new_tile():
 		tile = tiles_matrix[randi() % SIZE][randi() % SIZE]
 	tile.set_value(value)
 	update_val_matrix()
+	tile.play_appearance_animation()
 	
 func have_empty_tile() -> bool:
 	for i in SIZE:
