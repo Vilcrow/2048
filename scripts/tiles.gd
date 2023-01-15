@@ -12,6 +12,10 @@ var tiles_matrix = []
 var values_matrix = []
 var score := 0
 var paused := false
+#for touch control
+const SWIPE_SPEED = 30
+var ignore_swipe := false
+var swipe_dir = null
 
 func _ready():
 	randomize()
@@ -28,14 +32,36 @@ func _physics_process(_delta):
 		pass
 	elif !is_moving_possible():
 		game_over()
-	elif Input.is_action_just_pressed("move_up"):
+	elif Input.is_action_just_pressed("move_up") || swipe_dir == direction.up:
 		move_tiles(direction.up)
-	elif Input.is_action_just_pressed("move_down"):
+	elif Input.is_action_just_pressed("move_down") || swipe_dir == direction.down:
 		move_tiles(direction.down)
-	elif Input.is_action_just_pressed("move_left"):
+	elif Input.is_action_just_pressed("move_left") || swipe_dir == direction.left:
 		move_tiles(direction.left)
-	elif Input.is_action_just_pressed("move_right"):
+	elif Input.is_action_just_pressed("move_right") || swipe_dir == direction.right:
 		move_tiles(direction.right)
+
+#for touch control
+func _input(event):
+	if ignore_swipe:
+		if event is InputEventScreenTouch:
+			if !event.pressed: #touch released
+				ignore_swipe = false
+		swipe_dir = null
+	elif event is InputEventScreenDrag:
+		if !swipe_dir:
+			if event.relative.y < -SWIPE_SPEED:
+				swipe_dir = direction.up
+				ignore_swipe = true
+			elif event.relative.y > SWIPE_SPEED:
+				swipe_dir = direction.down
+				ignore_swipe = true
+			elif event.relative.x < -SWIPE_SPEED:
+				swipe_dir = direction.left
+				ignore_swipe = true
+			elif event.relative.x > SWIPE_SPEED:
+				swipe_dir = direction.right
+				ignore_swipe = true
 
 func connect_signals():
 	var err = connect("score_changed", get_node("../HUD"), "change_score")
