@@ -9,11 +9,11 @@
 [ext_resource path="res://scenes/hud_panel_style.tres" type="StyleBox" id=7]
 [ext_resource path="res://icons/pause.png" type="Texture" id=8]
 
-[sub_resource type="InputEventAction" id=3]
+[sub_resource type="InputEventAction" id=20]
 action = "restart_game"
 
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
+[sub_resource type="ShortCut" id=21]
+shortcut = SubResource( 20 )
 
 [sub_resource type="InputEventAction" id=18]
 action = "pause_game"
@@ -93,8 +93,7 @@ margin_right = 101.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-shortcut_in_tooltip = false
-shortcut = SubResource( 4 )
+shortcut = SubResource( 21 )
 texture_normal = ExtResource( 5 )
 expand = true
 
@@ -104,7 +103,6 @@ margin_right = 238.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-shortcut_in_tooltip = false
 shortcut = SubResource( 19 )
 texture_normal = ExtResource( 8 )
 expand = true

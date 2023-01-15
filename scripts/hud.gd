@@ -81,7 +81,7 @@ func _on_PauseButton_pressed():
 		continue_game()
 	else:
 		pause_game()
-		
+
 func pause_game():
 	paused = true
 	restart_button.set_disabled(true)
