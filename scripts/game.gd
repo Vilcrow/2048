@@ -4,10 +4,12 @@ const CONFIG_FILE_PATH = "user://config_2048.cfg"
 const MAX_VAL = 131072
 const GOAL_SCORE = 2048
 const MATRIX_SIZE = 4
+var OS_NAME : String
 var paused := false
 
 func _ready():
 	randomize()
+	OS_NAME = OS.get_name()
 	read_config()
 	
 func pause():

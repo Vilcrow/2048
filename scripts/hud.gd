@@ -51,6 +51,9 @@ func update_timer():
 		time_h += 1
 		time_m = 0
 	timer_label.text = get_time_string()
+	#unable save the config file in _exit_tree() for Android
+	if Game.OS_NAME == "Android":
+		save_config_all()
 
 func reset_timer():
 	time_h = 0
@@ -157,7 +160,9 @@ func quit():
 	get_tree().quit()
 
 func _exit_tree():
-	save_config_all()
+	#for Android it is saved in the update_timer() func
+	if Game.OS_NAME != "Android":
+		save_config_all()
 
 func save_config_all():
 	var config = ConfigFile.new()
