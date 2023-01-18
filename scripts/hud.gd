@@ -41,6 +41,9 @@ func _ready():
 	if !Game.is_paused():
 		timer.start()
 		pause_label.hide()
+	if Game.OS_NAME == "HTML5":
+		exit_button.set_disabled(true)
+		exit_button.hide()
 
 func update_timer():
 	time_s += 1
