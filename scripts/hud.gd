@@ -41,6 +41,9 @@ func _ready():
 	if !Game.is_paused():
 		timer.start()
 		pause_label.hide()
+		pause_button.set_pressed(false)
+	else:
+		pause_button.set_pressed(true)
 	if Game.OS_NAME == "HTML5":
 		exit_button.set_disabled(true)
 		exit_button.hide()
@@ -79,6 +82,7 @@ func restart_game():
 	won = false
 	reset_timer()
 	pause_label.hide()
+	pause_button.set_pressed(false)
 	emit_signal("game_restarted")
 
 func _on_RestartButton_pressed():
@@ -92,11 +96,13 @@ func _on_PauseButton_pressed():
 
 func pause_game():
 	pause_label.show()
+	pause_button.set_pressed(true)
 	timer.stop()
 	Game.pause()
 
 func continue_game():
 	pause_label.hide()
+	pause_button.set_pressed(false)
 	timer.start()
 	Game.continue()
 
@@ -127,6 +133,7 @@ func win_game():
 									   %[str(score_val), get_time_string()]
 	win_panel.show()
 	pause_game()
+	save_config_all()
 
 func _on_WinPanel_OkButton_pressed():
 	restart_button.set_disabled(false)
@@ -148,6 +155,7 @@ func game_over():
 	game_over_ok_button.set_disabled(false)
 	game_over_panel.show()
 	pause_game()
+	save_config_all()
 
 func _on_GameOverPanel_OkButton_pressed():
 	Game.pause()
